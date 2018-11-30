@@ -25,11 +25,12 @@ resource "random_id" "random_project_id_suffix" {
   Locals configuration
  *****************************************/
 locals {
-  project_id             = "${google_project.project.project_id}"
-  project_number         = "${google_project.project.number}"
-  project_org_id         = "${var.folder_id != "" ? "" : var.org_id}"
-  project_folder_id      = "${var.folder_id != "" ? var.folder_id : ""}"
-  temp_project_id        = "${var.random_project_id ? format("%s-%s",var.name,random_id.random_project_id_suffix.hex) : var.name}"
+  project_id        = "${google_project.project.project_id}"
+  project_number    = "${google_project.project.number}"
+  project_org_id    = "${var.folder_id != "" ? "" : var.org_id}"
+  project_folder_id = "${var.folder_id != "" ? var.folder_id : ""}"
+
+  //temp_project_id        = "${var.random_project_id ? format("%s-%s",var.name,random_id.random_project_id_suffix.hex) : var.name}"
   domain                 = "${var.domain != "" ? var.domain : var.org_id != "" ? join("", data.google_organization.org.*.domain) : ""}"
   args_missing           = "${var.group_name != "" && var.org_id == "" && var.domain == "" ? 1 : 0}"
   s_account_fmt          = "${format("serviceAccount:%s", google_service_account.default_service_account.email)}"
@@ -88,7 +89,7 @@ data "google_organization" "org" {
  *******************************************/
 resource "google_project" "project" {
   name       = "${var.name}"
-  project_id = "${local.temp_project_id}"
+  project_id = "${local.project_id}"
   org_id     = "${local.project_org_id}"
   folder_id  = "${local.project_folder_id}"
 
