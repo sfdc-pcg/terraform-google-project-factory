@@ -25,7 +25,7 @@ resource "random_id" "random_project_id_suffix" {
   Locals configuration
  *****************************************/
 locals {
-  project_id        = "${google_project.project.project_id}"
+  project_id        = "${var.name}"
   project_number    = "${google_project.project.number}"
   project_org_id    = "${var.folder_id != "" ? "" : var.org_id}"
   project_folder_id = "${var.folder_id != "" ? var.folder_id : ""}"
