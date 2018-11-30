@@ -87,10 +87,10 @@ data "google_organization" "org" {
   Project creation
  *******************************************/
 resource "google_project" "project" {
-  name                = "${var.name}"
-  project_id          = "${local.temp_project_id}"
-  org_id              = "${local.project_org_id}"
-  folder_id           = "${local.project_folder_id}"
+  name       = "${var.name}"
+  project_id = "${local.temp_project_id}"
+  org_id     = "${local.project_org_id}"
+  folder_id  = "${local.project_folder_id}"
 
   auto_create_network = "${var.auto_create_network}"
 
