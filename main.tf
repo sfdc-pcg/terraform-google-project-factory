@@ -15,6 +15,18 @@
  */
 
 /******************************************
+  APIs configuration
+ *****************************************/
+resource "google_project_service" "project_services" {
+  count = "${length(var.activate_apis)}"
+
+  project = "${var.name}"
+  service = "${element(var.activate_apis, count.index)}"
+
+  depends_on = ["google_project.project"]
+}
+
+/******************************************
   Project random id suffix configuration
  *****************************************/
 resource "random_id" "random_project_id_suffix" {
@@ -98,18 +110,6 @@ resource "google_project" "project" {
   labels = "${var.labels}"
 
   app_engine = "${local.app_engine_config["${local.app_engine_enabled ? "enabled" : "disabled"}"]}"
-}
-
-/******************************************
-  APIs configuration
- *****************************************/
-resource "google_project_service" "project_services" {
-  count = "${length(var.activate_apis)}"
-
-  project = "${local.project_id}"
-  service = "${element(var.activate_apis, count.index)}"
-
-  depends_on = ["google_project.project"]
 }
 
 /******************************************
