@@ -38,6 +38,11 @@ variable "shared_vpc" {
   default     = ""
 }
 
+variable "billing_account" {
+  description = "Billing account for project after API activated"
+  default     = ""
+}
+
 variable "folder_id" {
   description = "The ID of a folder to host this project"
   default     = ""
