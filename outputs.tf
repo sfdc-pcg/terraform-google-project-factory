@@ -71,3 +71,8 @@ output "app_engine_enabled" {
   value       = "${local.app_engine_enabled}"
   description = "Whether app engine is enabled"
 }
+
+output "compute_default_service_account_id" {
+  value       = "${data.google_compute_default_service_account.default.id}"
+  description = "Default compute service account id"
+}

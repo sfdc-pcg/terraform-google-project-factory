@@ -132,22 +132,6 @@ data "google_compute_default_service_account" "default" {
 }
 
 /******************************************
-  Default compute service account deletion
- *****************************************/
-resource "null_resource" "delete_default_compute_service_account" {
-  provisioner "local-exec" {
-    command = "${path.module}/scripts/delete-service-account.sh ${local.project_id} ${var.credentials_path} ${data.google_compute_default_service_account.default.id}"
-  }
-
-  triggers {
-    default_service_account = "${data.google_compute_default_service_account.default.id}"
-    activated_apis          = "${join(",", var.activate_apis)}"
-  }
-
-  depends_on = ["google_project_service.project_services", "data.google_compute_default_service_account.default"]
-}
-
-/******************************************
   Default Service Account configuration
  *****************************************/
 resource "google_service_account" "default_service_account" {
