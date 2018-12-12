@@ -109,7 +109,7 @@ resource "google_project" "project" {
 
   labels = "${var.labels}"
 
-  app_engine = "${local.app_engine_config["${local.app_engine_enabled ? "enabled" : "disabled"}"]}"
+  //app_engine = "${local.app_engine_config["${local.app_engine_enabled ? "enabled" : "disabled"}"]}"
 }
 
 /******************************************
